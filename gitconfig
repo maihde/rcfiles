@@ -1,6 +1,48 @@
 [core]
 	editor = vim
+	pager = less -+$LESS -FRX
+
+[merge]
+	conflictstyle = diff3
+
+[color]
+	ui = true
+
+[push]
+	default = current
 
 [alias]
-	s = status --short
+	######################################################################
+        # Short Hand
+	######################################################################
+        b = branch
+	s = status -uno
 	co = checkout
+
+	######################################################################
+        # Changing the working copy of files
+	######################################################################
+	undo = checkout --
+	undo-all = checkout -f
+	ur = !git clean -f -d && git reset --hard     # appoximately `svn update -r`
+
+	######################################################################
+        # Diff shortcuts
+	######################################################################
+	d = diff --ignore-space-at-eol --ignore-space-change --ignore-all-space	
+	dc = diff --cached
+
+	######################################################################
+        # Log stuff
+	######################################################################
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	lgs = log --oneline --stat
+	lgp = log --online --stat -p
+	lgr = log HEAD --not --remotes=* --online    # show commits not yet pushed
+	last = log -1 HEAD --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %C(green)(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
+	######################################################################
+        # Rebase stuff
+	######################################################################
+	rbi = rebase -i 'HEAD@{upstream}'
+	rbws = rebase --whitespace=fix 'HEAD@{upstream}'
